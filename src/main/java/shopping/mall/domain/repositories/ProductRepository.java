@@ -1,4 +1,4 @@
 package shopping.mall.domain.repositories;
 
-interface ProductRepository {
+public interface ProductRepository {
 }
