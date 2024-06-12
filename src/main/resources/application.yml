@@ -1,3 +1,5 @@
+server:
+  port: 8089
 spring:
   datasource:
     url: jdbc:h2:tcp://localhost/~/jjim
@@ -11,6 +13,9 @@ spring:
       hibernate:
         #        show_sql: true
         format_sql: true
+  application:
+    admin:
+      jmx-name:
 logging.level:
   org.hibernate.SQL: debug
 #  org.hibernate.type: trace
