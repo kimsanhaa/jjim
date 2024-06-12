@@ -23,20 +23,21 @@ class JwtTest {
         Assertions.assertThat(jwt).isNotNull();
     }
 
-//    @Test
-//    public void sut는_jwt토큰을_검증한다(){
-//        //Arrange
-//        long id = 1L;
-//        String email = "jjim@jjim.com";
-//        String password = "jjim";
-//        Users users = createUsers(id, email, password);
-//        Jwt jwt = new Jwt(users);
-//        //act
-//        jwt.validate()
-//
-//        //Assert
-//        Assertions.assertThat(jwt).isNotNull();
-//    }
+    @Test
+    public void sut는_jwt토큰을_검증한다(){
+        //Arrange
+        long id = 1L;
+        String email = "jjim@jjim.com";
+        String password = "jjim";
+        Users users = createUsers(id, email, password);
+        Jwt jwt = new Jwt(users);
+
+        //act
+        boolean actual = jwt.validate(jwt.getToken(), users);
+
+        //Assert
+        Assertions.assertThat(actual).isTrue();
+    }
 
     private Users createUsers(long id,String email, String password){
         Users users = new Users(email, password);
