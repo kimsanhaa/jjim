@@ -1,10 +1,11 @@
 package shopping.mall.domain.entities;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import static org.junit.jupiter.api.Assertions.*;
+import shopping.mall.domain.vo.Jwt;
 
 class JwtTest {
 

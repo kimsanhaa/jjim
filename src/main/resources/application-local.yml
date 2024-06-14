@@ -1,0 +1,28 @@
+server:
+  port: 8089
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jjim
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+  application:
+    admin:
+      jmx-name:
+logging.level:
+  org.hibernate.SQL: debug
+#  org.hibernate.type: trace
+# [MyBatis]
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    use-actual-param-name: true

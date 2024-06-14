@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JjimApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JjimApplication.class, args);
+			SpringApplication.run(JjimApplication.class, args);
 	}
 
 }

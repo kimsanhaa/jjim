@@ -1,8 +1,10 @@
-package shopping.mall.domain.entities;
+package shopping.mall.domain.vo;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import shopping.mall.domain.entities.Users;
+
 import java.util.Date;
 
 
@@ -33,6 +35,12 @@ public class Jwt {
             return false;
         }
     }
+
+    public boolean validate(String token) {
+        Claims body = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return true;
+    }
+
 
     private String generateToken(Users users) {
         Date now = new Date();
