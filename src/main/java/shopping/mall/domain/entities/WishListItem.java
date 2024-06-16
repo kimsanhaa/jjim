@@ -5,14 +5,14 @@ import lombok.Getter;
 
 @Getter
 @Entity
-public class WishlistItem {
+public class WishListItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "wishlist_id", nullable = false)
-    private Wishlist wishlist;
+    private WishList wishlist;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)

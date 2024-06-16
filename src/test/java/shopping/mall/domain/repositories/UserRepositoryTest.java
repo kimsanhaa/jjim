@@ -8,19 +8,17 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import shopping.mall.domain.entities.Users;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Disabled
-class UsersRepositoryTest {
+class UserRepositoryTest {
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
     @Test
     public void sut는_user를_저장한다(){
         //Arrange
-        UsersRepository sut = usersRepository;
+        UserRepository sut = userRepository;
         String email = "jjim1234@jjim.com";
         String password = "jjim1234";
         Users user = new Users(email, password);

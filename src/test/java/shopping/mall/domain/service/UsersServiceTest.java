@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 import shopping.mall.domain.entities.Users;
-import shopping.mall.domain.repositories.UsersRepository;
+import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.ui.api.request.SignUpUsersRequest;
 
 import java.util.Collections;
-import java.util.List;
 
 class UsersServiceTest {
 
-    private final UsersRepository usersRepository = Mockito.mock(UsersRepository.class);
+    private final UserRepository userRepository = Mockito.mock(UserRepository.class);
 
-    private UserService userService = new UserService(usersRepository);
+    private UserService userService = new UserService(userRepository);
 
     @Test
     public void sut는_중복된_이메일이_존재하면_예외가_발생한다(){
@@ -31,7 +30,7 @@ class UsersServiceTest {
         Users user = new Users();
         ReflectionTestUtils.setField(user,"email",email);
         ReflectionTestUtils.setField(user,"password",password);
-        Mockito.when(usersRepository.findUsersByEmail(email))
+        Mockito.when(userRepository.findUsersByEmail(email))
                 .thenReturn(Collections.singletonList(user));
 
         //Act

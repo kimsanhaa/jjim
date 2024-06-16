@@ -2,12 +2,12 @@ package shopping.mall.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import shopping.mall.domain.repositories.WishlistRepository;
+import shopping.mall.infrastructure.persistence.jpa.WishListJpaRepository;
 
 @RequiredArgsConstructor
 @Component
 public class WishlistService {
-    private final WishlistRepository wishlistRepository;
+    private final WishListJpaRepository wishListJpaRepository;
 
     public void addWishList(){
     }

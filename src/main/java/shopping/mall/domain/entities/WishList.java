@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 @Getter
 @Entity
-public class Wishlist {
+public class WishList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,5 +20,5 @@ public class Wishlist {
     private String name;
 
     @OneToMany(mappedBy = "wishlist", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<WishlistItem> items = new HashSet<>();
+    private Set<WishListItem> items = new HashSet<>();
 }

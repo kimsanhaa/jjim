@@ -1,13 +1,11 @@
-package shopping.mall.domain.repositories;
+package shopping.mall.infrastructure.persistence.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import shopping.mall.domain.entities.Users;
 
 import java.util.List;
 
-@Repository
-public interface UsersRepository extends JpaRepository<Users,Long> {
+public interface UserJpaRepository extends JpaRepository<Users,Long> {
      List<Users> findUsersByEmail(String email);
 }
 

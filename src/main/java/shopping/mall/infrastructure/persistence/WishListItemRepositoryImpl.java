@@ -1,7 +1,4 @@
 package shopping.mall.infrastructure.persistence;
 
-
-
-public class UsersRepositoryImpl {
-
+public class WishListItemRepositoryImpl {
 }
