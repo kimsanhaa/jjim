@@ -22,12 +22,12 @@ public class Users {
     @Column(nullable = false)
     private String password;
 
-    public Users(String email, String password) {
+    private Users(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public Users create(SignUpUsersRequest request) {
+    public static Users create(SignUpUsersRequest request) {
         if(!isValidEmail(request.getEmail())){
             throw new IllegalArgumentException("이메일이 올바르지 않습니다.");
         }
@@ -38,7 +38,7 @@ public class Users {
         return new Users(request.getEmail(), request.getPassword());
     }
 
-    private boolean isValidEmail(String email) {
+    private static boolean isValidEmail(String email) {
         String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(email);
