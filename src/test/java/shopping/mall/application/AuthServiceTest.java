@@ -39,7 +39,7 @@ class AuthServiceTest {
         Exception actual = null;
         //act
 
-        String token = sut.tokenGenerate(userId,expirationMs);
+        String token = sut.tokenGenerate(userId);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {

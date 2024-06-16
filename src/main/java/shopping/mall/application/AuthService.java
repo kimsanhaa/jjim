@@ -10,7 +10,8 @@ public class AuthService {
     private final TokenGenerator tokenGenerator;
     private final TokenValidator tokenValidator;
 
-    public String tokenGenerate(long userId, long expireMs) {
+    public String tokenGenerate(long userId) {
+        long expireMs = 1000 * 60;
         return tokenGenerator.generate(userId ,expireMs);
     }
 
