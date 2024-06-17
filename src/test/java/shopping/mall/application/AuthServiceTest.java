@@ -2,15 +2,10 @@ package shopping.mall.application;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.util.ReflectionTestUtils;
-import shopping.mall.domain.entities.Users;
 import shopping.mall.domain.validator.TokenValidator;
 import shopping.mall.infrastructure.jwt.TokenGeneratorImpl;
 import shopping.mall.infrastructure.jwt.TokenValidatorImpl;
-import shopping.mall.ui.api.request.SignUpUsersRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
 class AuthServiceTest {
     private TokenGeneratorImpl tokenGenerator = new TokenGeneratorImpl();
     private TokenValidator tokenValidator = new TokenValidatorImpl();
@@ -21,10 +16,9 @@ class AuthServiceTest {
         //Arrange
         long userId = 1L;
         AuthService sut = authService;
-        long expirationMs = 1000 * 60;
 
         //act
-        String actual = sut.tokenGenerate(userId,expirationMs);
+        String actual = sut.tokenGenerate(userId);
 
         //Assert
         Assertions.assertThat(actual).isNotNull();
@@ -32,13 +26,14 @@ class AuthServiceTest {
 
     @Test
     public void sut는_expire_지나면_예외가_발생한다(){
+        //todo 테스트코드 다시 작성하기
         //Arrange
         long userId = 1L;
         AuthService sut = authService;
         long expirationMs = 1;
         Exception actual = null;
-        //act
 
+        //act
         String token = sut.tokenGenerate(userId);
         try {
             Thread.sleep(3000);
