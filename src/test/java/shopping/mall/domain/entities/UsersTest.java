@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 import shopping.mall.ui.api.request.SignUpUsersRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class UsersTest {
 
     @Test
@@ -14,12 +12,11 @@ class UsersTest {
         //Arrange
         String email = "test@test.com";
         String password = "test";
-        SignUpUsersRequest request = getSignUpUsersRequest(email, password);
         Exception actual = null;
 
         //Act
         try {
-            Users users = Users.create(request);
+            Users users = Users.create(email,password);
         }catch (Exception e){
             actual = e;
         }
@@ -34,12 +31,11 @@ class UsersTest {
         //Arrange
         String email = "test";
         String password = "test";
-        SignUpUsersRequest request = getSignUpUsersRequest(email, password);
         Exception actual = null;
 
         //Act
         try {
-            Users users = Users.create(request);
+            Users users = Users.create(email,password);
         }catch (Exception e){
             actual = e;
         }
@@ -48,12 +44,5 @@ class UsersTest {
         Assertions.assertThat(actual).isInstanceOf(IllegalArgumentException.class);
         Assertions.assertThat(actual.getMessage()).isEqualTo("이메일이 올바르지 않습니다.");
 
-    }
-
-    private static SignUpUsersRequest getSignUpUsersRequest(String email, String password) {
-        SignUpUsersRequest request = new SignUpUsersRequest();
-        ReflectionTestUtils.setField(request,"email", email);
-        ReflectionTestUtils.setField(request,"password", password);
-        return request;
     }
 }

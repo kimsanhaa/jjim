@@ -27,15 +27,15 @@ public class Users {
         this.password = password;
     }
 
-    public static Users create(SignUpUsersRequest request) {
-        if(!isValidEmail(request.getEmail())){
+    public static Users create(String email, String password) {
+        if(!isValidEmail(email)){
             throw new IllegalArgumentException("이메일이 올바르지 않습니다.");
         }
 
-        if(request.getPassword().length() < 5){
+        if(password.length() < 5){
             throw new IllegalArgumentException("비밀번호는 5글자 이상이어야 합니다.");
         };
-        return new Users(request.getEmail(), request.getPassword());
+        return new Users(email, password);
     }
 
     private static boolean isValidEmail(String email) {
