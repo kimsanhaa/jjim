@@ -9,6 +9,7 @@ import shopping.mall.domain.entities.WishList;
 import shopping.mall.domain.repositories.ItemRepository;
 import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.domain.repositories.WishListRepository;
+import shopping.mall.ui.api.request.AddWishListRequest;
 import shopping.mall.ui.api.request.CreateWishListRequest;
 import shopping.mall.ui.api.request.DeleteWishListRequest;
 
@@ -41,14 +42,23 @@ public class WishlistService {
         }
     }
     @Transactional
-    public void addWishList(long wishListId, long itemId){
-        WishList wishList = wishListRepository.findByWishListId(wishListId)
+    public void addWishList(AddWishListRequest request){
+        WishList wishList = wishListRepository.findByWishListId(request.getWishListId())
                 .orElseThrow(() -> new IllegalArgumentException("wishListId 값이 올바르지 않습니다."));
 
-        Item item = itemRepository.findByItemId(itemId)
+        // todo 상품이 다른 wishList에 있는지 확인하는 로직 추가 필요
+
+        Item item = itemRepository.findByItemId(request.getItemId())
                 .orElseThrow(() -> new IllegalArgumentException("itemId 값이 올바르지 않습니다.") );
 
         wishList.addItems(item);
+    }
+    @Transactional
+    public void removeFromWishlist(long itemId){
+        Item item = itemRepository.findByItemId(itemId)
+                .orElseThrow(() -> new IllegalArgumentException("itemId 값이 올바르지 않습니다."));
+
+        item.getWishList().removeItems(item);
     }
 
     @Transactional(readOnly = true)
