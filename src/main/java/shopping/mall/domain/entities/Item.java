@@ -4,10 +4,14 @@ import lombok.Getter;
 
 @Getter
 @Entity
-public class Product {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Float price;
+
+    @ManyToOne
+    @JoinColumn(name = "wishList_id")
+    private WishList wishList;
 }

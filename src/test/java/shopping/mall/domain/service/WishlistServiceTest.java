@@ -6,16 +6,18 @@ import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 import shopping.mall.domain.entities.Users;
 import shopping.mall.domain.entities.WishList;
+import shopping.mall.domain.repositories.ItemRepository;
 import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.domain.repositories.WishListRepository;
-import shopping.mall.ui.api.request.AddWishListRequest;
+import shopping.mall.ui.api.request.CreateWishListRequest;
 
 import java.util.Optional;
 
 class WishlistServiceTest {
     private WishListRepository wishListRepository = Mockito.mock(WishListRepository.class);
     private UserRepository userRepository = Mockito.mock(UserRepository.class);
-    private WishlistService wishlistService = new WishlistService(wishListRepository,userRepository);
+    private ItemRepository itemRepository  = Mockito.mock(ItemRepository.class);
+    private WishlistService wishlistService = new WishlistService(wishListRepository,userRepository,itemRepository);
 
     @Test
     public void sut는_요청된_userId_값이_null이면_예외가_발생한다(){
@@ -28,7 +30,7 @@ class WishlistServiceTest {
         Mockito.when(userRepository.findByUserId(userId))
                 .thenReturn(Optional.empty());
 
-        AddWishListRequest request = new AddWishListRequest();
+        CreateWishListRequest request = new CreateWishListRequest();
         ReflectionTestUtils.setField(request,"userId",userId);
         ReflectionTestUtils.setField(request,"wishListName",wishListName);
 
@@ -61,7 +63,7 @@ class WishlistServiceTest {
         Mockito.when(wishListRepository.findByUserIdAndWishListName(userId,wishListName))
                 .thenReturn(wishList);
 
-        AddWishListRequest request = new AddWishListRequest();
+        CreateWishListRequest request = new CreateWishListRequest();
         ReflectionTestUtils.setField(request,"userId",userId);
         ReflectionTestUtils.setField(request,"wishListName",wishListName);
 

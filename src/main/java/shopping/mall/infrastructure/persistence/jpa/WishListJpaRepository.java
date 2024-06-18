@@ -6,6 +6,9 @@ import org.springframework.data.repository.query.Param;
 import shopping.mall.domain.entities.Users;
 import shopping.mall.domain.entities.WishList;
 
+import java.util.List;
+
 public interface WishListJpaRepository extends JpaRepository<WishList, Long> {
     WishList findWishListByUserIdAndName(Long userId, String wishListName);
+    List<WishList> findByUserId(Long userId);
 }
