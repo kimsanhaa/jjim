@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +26,7 @@ public class WishList {
     private String name;
 
     @OneToMany
-    private ArrayList<Item> items = new ArrayList<>();
+    private List<Item> items =  new ArrayList<>();
 
     private WishList(Users user, String name) {
         this.user = user;

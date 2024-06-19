@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
+import shopping.mall.application.UserService;
 import shopping.mall.domain.entities.Users;
 import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.ui.api.request.SignUpUsersRequest;

@@ -1,6 +1,5 @@
 package shopping.mall.ui.api.config;
 
-import org.apache.catalina.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import shopping.mall.application.AuthService;
@@ -8,12 +7,11 @@ import shopping.mall.domain.generator.TokenGenerator;
 import shopping.mall.domain.repositories.ItemRepository;
 import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.domain.repositories.WishListRepository;
-import shopping.mall.domain.service.UserService;
-import shopping.mall.domain.service.WishlistService;
+import shopping.mall.application.UserService;
+import shopping.mall.application.WishlistService;
 import shopping.mall.domain.validator.TokenValidator;
 import shopping.mall.infrastructure.jwt.TokenGeneratorImpl;
 import shopping.mall.infrastructure.jwt.TokenValidatorImpl;
-import shopping.mall.infrastructure.persistence.UserRepositoryImpl;
 
 @Configuration
 public class ServiceConfig {

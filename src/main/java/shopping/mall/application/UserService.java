@@ -1,7 +1,6 @@
-package shopping.mall.domain.service;
+package shopping.mall.application;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shopping.mall.domain.entities.Users;
 import shopping.mall.domain.repositories.UserRepository;

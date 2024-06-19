@@ -3,14 +3,13 @@ package shopping.mall.domain.service.WishListServiceTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.test.util.ReflectionTestUtils;
 import shopping.mall.Reflection.ReflectionProvider;
 import shopping.mall.domain.entities.Users;
 import shopping.mall.domain.entities.WishList;
 import shopping.mall.domain.repositories.ItemRepository;
 import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.domain.repositories.WishListRepository;
-import shopping.mall.domain.service.WishlistService;
+import shopping.mall.application.WishlistService;
 import shopping.mall.ui.api.exception.BusinessException;
 import shopping.mall.ui.api.request.CreateWishListRequest;
 

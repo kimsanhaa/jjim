@@ -9,9 +9,8 @@ import shopping.mall.domain.entities.WishList;
 import shopping.mall.domain.repositories.ItemRepository;
 import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.domain.repositories.WishListRepository;
-import shopping.mall.domain.service.WishlistService;
+import shopping.mall.application.WishlistService;
 import shopping.mall.ui.api.exception.BusinessException;
-import shopping.mall.ui.api.request.AddWishListRequest;
 import shopping.mall.ui.api.request.RemoveWishListItemRequest;
 
 public class RemoveFromWishlistTest {
