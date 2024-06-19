@@ -6,4 +6,5 @@ import lombok.Getter;
 public class AddWishListRequest {
     long wishListId;
     long itemId;
+    long userId;
 }

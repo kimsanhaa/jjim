@@ -28,12 +28,18 @@ public class WishListRepositoryImpl implements WishListRepository {
     }
 
     @Override
-    public Optional<WishList> findByWishListId(long wishListId) {
-        return wishListJpaRepository.findById(wishListId);
+    public WishList findByWishListId(long wishListId) {
+        return wishListJpaRepository.findById(wishListId)
+                .orElseThrow(() -> new IllegalArgumentException("wishListId 값이 올바르지 않습니다."));
     }
 
     @Override
     public List<WishList> findByUserId(Long userId) {
         return wishListJpaRepository.findByUserId(userId);
+    }
+
+    @Override
+    public boolean existsWishListByUserIdAndItemId(Long userId, Long itemId) {
+        return wishListJpaRepository.existsWishListByUserIdAndItemId(userId,itemId);
     }
 }

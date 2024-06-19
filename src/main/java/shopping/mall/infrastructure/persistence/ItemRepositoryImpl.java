@@ -12,7 +12,7 @@ public class ItemRepositoryImpl implements ItemRepository {
     private  final ItemJpaRepository itemJpaRepository;
 
     @Override
-    public Optional<Item> findByItemId(Long itemId) {
-        return itemJpaRepository.findById(itemId);
+    public Item findByItemId(Long itemId) {
+        return itemJpaRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("itemId 값이 올바르지 않습니다."));
     }
 }

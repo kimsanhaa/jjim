@@ -9,11 +9,16 @@ import shopping.mall.domain.entities.WishList;
 import shopping.mall.domain.repositories.ItemRepository;
 import shopping.mall.domain.repositories.UserRepository;
 import shopping.mall.domain.repositories.WishListRepository;
+import shopping.mall.ui.api.exception.BusinessException;
+import shopping.mall.ui.api.exception.ExceptionResponse;
 import shopping.mall.ui.api.request.AddWishListRequest;
 import shopping.mall.ui.api.request.CreateWishListRequest;
 import shopping.mall.ui.api.request.DeleteWishListRequest;
+import shopping.mall.ui.api.request.RemoveWishListItemRequest;
 
 import java.util.List;
+
+import static shopping.mall.ui.api.exception.ExceptionResponse.*;
 
 @AllArgsConstructor
 public class WishlistService {
@@ -24,41 +29,48 @@ public class WishlistService {
     @Transactional
     public void createWishList(CreateWishListRequest request){
         Users user = userRepository.findByUserId(request.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+            .orElseThrow(() -> new BusinessException(NotFoundUserId));
 
         if(wishListRepository.findByUserIdAndWishListName(request.getUserId(), request.getWishListName()) != null){
-            throw new IllegalArgumentException("이미 있는 찜 서랍 이름입니다.");
+            throw new BusinessException(DuplicateWishListName);
         }
 
         WishList wishList = WishList.create(user, request.getWishListName());
         wishListRepository.save(wishList);
     }
+
     @Transactional
     public void deleteWishList(DeleteWishListRequest request){
-        try {
-            wishListRepository.deleteByWishListId(request.getUserId());
-        }catch (EmptyResultDataAccessException e){
-            throw new IllegalArgumentException("wishListId 값이 올바르지 않습니다.");
+        if(wishListRepository.findByWishListId(request.getWishListId()).getUser().getId() != request.getUserId()){
+            throw new BusinessException(NotFoundWishListId);
         }
+        wishListRepository.deleteByWishListId(request.getWishListId());
     }
+
     @Transactional
     public void addWishList(AddWishListRequest request){
-        WishList wishList = wishListRepository.findByWishListId(request.getWishListId())
-                .orElseThrow(() -> new IllegalArgumentException("wishListId 값이 올바르지 않습니다."));
+        WishList wishList = wishListRepository.findByWishListId(request.getWishListId());
 
-        // todo 상품이 다른 wishList에 있는지 확인하는 로직 추가 필요
+        if(wishList.getUser().getId() != request.getUserId()){
+            throw new BusinessException(NotFoundWishListId);
+        }
+        if (wishListRepository.existsWishListByUserIdAndItemId(request.getUserId(), request.getItemId())) {
+            throw new BusinessException(DuplicateItem);
+        }
 
-        Item item = itemRepository.findByItemId(request.getItemId())
-                .orElseThrow(() -> new IllegalArgumentException("itemId 값이 올바르지 않습니다.") );
-
+        Item item = itemRepository.findByItemId(request.getItemId());
         wishList.addItems(item);
     }
-    @Transactional
-    public void removeFromWishlist(long itemId){
-        Item item = itemRepository.findByItemId(itemId)
-                .orElseThrow(() -> new IllegalArgumentException("itemId 값이 올바르지 않습니다."));
 
-        item.getWishList().removeItems(item);
+    @Transactional
+    public void removeFromWishlist(RemoveWishListItemRequest request){
+        WishList wishList = wishListRepository.findByWishListId(request.getWishListId());
+
+        if(wishList.getUser().getId() != request.getUserId()){
+            throw new BusinessException(NotFoundWishListId);
+        }
+        Item item = itemRepository.findByItemId(request.getItemId());
+        wishList.removeItems(item);
     }
 
     @Transactional(readOnly = true)

@@ -11,7 +11,4 @@ public class Item {
     private String name;
     private Float price;
 
-    @ManyToOne
-    @JoinColumn(name = "wishList_id")
-    private WishList wishList;
 }

@@ -46,12 +46,4 @@ class UsersServiceTest {
         Assertions.assertThat(actual.getMessage()).isEqualTo("중복된 이메일이 있습니다.");
 
     }
-        public void sut는_성공적으로_회원가입을_한다(){
-        //Arrange
-
-
-        //Act
-
-        //Assert
-    }
 }

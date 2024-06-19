@@ -24,7 +24,7 @@ public class WishList {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "wishList", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     private ArrayList<Item> items = new ArrayList<>();
 
     private WishList(Users user, String name) {

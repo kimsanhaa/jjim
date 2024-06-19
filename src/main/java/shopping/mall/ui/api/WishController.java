@@ -4,10 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import shopping.mall.domain.entities.WishList;
 import shopping.mall.domain.service.WishlistService;
 import shopping.mall.ui.api.request.AddWishListRequest;
 import shopping.mall.ui.api.request.CreateWishListRequest;
 import shopping.mall.ui.api.request.DeleteWishListRequest;
+import shopping.mall.ui.api.request.RemoveWishListItemRequest;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,16 +37,14 @@ public class WishController {
     }
 
     @DeleteMapping("/wishList/items/{itemId}")
-    public ResponseEntity<Object> removeFromWishlist(@PathVariable("itemId") long itemId){
-        wishlistService.removeFromWishlist(itemId);
+    public ResponseEntity<Object> removeFromWishlist(RemoveWishListItemRequest request){
+        wishlistService.removeFromWishlist(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/wishList")
-    public ResponseEntity<Object> wishList(){
-        //todo token으로 userId 받기
-        long userId = 1;
-        wishlistService.getWishList(userId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/users/{usesId}/wishList")
+    public ResponseEntity<Object> wishListGet(@PathVariable long userId){
+        List<WishList> wishList = wishlistService.getWishList(userId);
+        return new ResponseEntity<>(wishList,HttpStatus.OK);
     }
 }

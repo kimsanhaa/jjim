@@ -4,5 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class DeleteWishListRequest {
+    private long wishListId;
     private long userId;
 }

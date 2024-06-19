@@ -5,5 +5,5 @@ import shopping.mall.domain.entities.Item;
 import java.util.Optional;
 
 public interface ItemRepository {
-    Optional<Item> findByItemId(Long ItemId);
+    Item findByItemId(Long ItemId);
 }
