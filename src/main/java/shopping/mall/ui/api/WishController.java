@@ -10,6 +10,7 @@ import shopping.mall.ui.api.request.AddWishListRequest;
 import shopping.mall.ui.api.request.CreateWishListRequest;
 import shopping.mall.ui.api.request.DeleteWishListRequest;
 import shopping.mall.ui.api.request.RemoveWishListItemRequest;
+import shopping.mall.ui.api.response.WishListResponse;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class WishController {
 
     @GetMapping("/users/{userId}/wishList")
     public ResponseEntity<Object> wishListGet(@PathVariable("userId") Long userId){
-        List<WishList> wishList = wishlistService.getWishList(userId);
+        List<WishListResponse> wishList = wishlistService.getWishList(userId);
         return new ResponseEntity<>(wishList,HttpStatus.OK);
     }
 }

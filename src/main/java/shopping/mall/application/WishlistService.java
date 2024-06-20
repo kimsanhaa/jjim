@@ -13,7 +13,9 @@ import shopping.mall.ui.api.request.AddWishListRequest;
 import shopping.mall.ui.api.request.CreateWishListRequest;
 import shopping.mall.ui.api.request.DeleteWishListRequest;
 import shopping.mall.ui.api.request.RemoveWishListItemRequest;
+import shopping.mall.ui.api.response.WishListResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static shopping.mall.ui.api.exception.ExceptionResponse.*;
@@ -72,7 +74,12 @@ public class WishlistService {
     }
 
     @Transactional(readOnly = true)
-    public List<WishList> getWishList(long userId){
-         return wishListRepository.findByUserId(userId);
+    public List<WishListResponse> getWishList(long userId){
+        List<WishList> wishLists = wishListRepository.findByUserId(userId);
+        List<WishListResponse> wishListResponseList = new ArrayList<>();
+        for(WishList wishList : wishLists){
+            wishListResponseList.add(new WishListResponse(wishList.getId(),wishList.getName()));
+        }
+        return wishListResponseList;
     }
 }
